@@ -26,8 +26,11 @@ endif
 
 ifeq ($(UNAME_S), Darwin)
   ECHO_MESSAGE = "Mac OS X"
-  LIBS += -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -lglfw
-  CXXFLAGS += -I/usr/local/include -I/opt/local/include -I/opt/homebrew/include
+  GLFW_INC_DIR := /opt/homebrew/opt/glfw/include
+  GLFW_LIB_DIR := /opt/homebrew/opt/glfw/lib
+
+  LIBS += -L$(GLFW_LIB_DIR) -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo -lglfw
+  CXXFLAGS += -I$(GLFW_INC_DIR) -I/usr/local/include -I/opt/local/include -I/opt/homebrew/include
 endif
 
 ifeq ($(OS), Windows_NT)

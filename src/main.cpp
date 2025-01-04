@@ -16,7 +16,8 @@
 #include <GLES2/gl2.h>
 #endif
 
-#include <glm/glm.hpp> // Include just to test that the linking process is successfull
+//#include <glm/glm.hpp> // Include just to test that the linking process is successfull
+//#include <glad/glad.h>
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
@@ -40,8 +41,18 @@ static void glfw_error_callback(int error, const char* description)
 int main(int, char**)
 {
     glfwSetErrorCallback(glfw_error_callback);
-    if (!glfwInit())
+    if (!glfwInit()){
+        fprintf(stderr, "GLFW Initialization Failed");
         return 1;
+    }
+
+//works but should provide rendering logic
+/*
+    if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+        fprintf(stderr, "GLAD Initialization Failed");
+        return 1;
+    }
+*/
 
     // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)

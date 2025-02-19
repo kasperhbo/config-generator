@@ -16,6 +16,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DVK_PROTOTYPES")
 # Directories for ImGui and Glad
 set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/lib/imgui)
 set(GLAD_DIR ${CMAKE_SOURCE_DIR}/lib/glad/include)
+set(NLOHMANN_JSON_DIR ${CMAKE_SOURCE_DIR}/lib/nlohmann)
 
 # Add ImGui and Glad sources
 set(SOURCES
@@ -27,6 +28,10 @@ set(SOURCES
         ${IMGUI_DIR}/imgui_widgets.cpp
         ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
         ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp
+
+        ${NLOHMANN_JSON_DIR}/json.hpp
+        ${NLOHMANN_JSON_DIR}/json_fwd.hpp
+
         ${CMAKE_SOURCE_DIR}/lib/glad/src/glad.c
 
         src/Core/Application.cpp
@@ -35,8 +40,8 @@ set(SOURCES
 
 add_executable(Renderer ${SOURCES})
 target_include_directories(Renderer PRIVATE ${IMGUI_DIR})
-target_include_directories(Renderer PRIVATE lib/glad/include)
-
+target_include_directories(Renderer PRIVATE ${GLAD_DIR})
+target_include_directories(Renderer PRIVATE ${NLOHMANN_JSON_DIR})
 
 
 # Libraries
